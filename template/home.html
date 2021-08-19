@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>Movie Matrix</title>
+        <body>
+            <ul>
+                {% for d in data %}
+                    <li>
+                        {{d}}
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <form action="/home" method="POST">
+                <input name="val" placeholder="enter rating for movies">
+                <button type="submit"> Submit </button>            
+            </form>
+        </body>
+    </head>
+</html>
