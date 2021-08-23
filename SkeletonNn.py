@@ -1,23 +1,40 @@
-from keras import models
+
 import keras
+from keras.backend import argmax
 from keras.models import Sequential
 
+import pandas as pd
+from pandas.core.construction import array
+
 model = Sequential()
-model.add(keras.layers.Dense(12, input_dim=X, activation='relu'))
-model.add(keras.layers.Dense(1, activation='sigmoid'))
+model.add(keras.layers.Dense(12, input_dim=3, activation='relu'))
+model.add(keras.layers.Dense(3, activation='sigmoid'))
 
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-# train_x, train_y, test_x, test_y = imported data
-# imported dataset will be X coloumns of independent variables such as speed, terrain roughness, angle of elevation, torque etc
-# last 1(Y) coloumn will be fuel efficieny/ whatever output is required calucalted manually, after fitting the model, the predicted output will give exact fuel efficiency 
-# for any variation in the first X columns
+dataset = pd.read_csv("red.csv")
 
-model.fit(train_x, train_y, epochs=5)
 
-tested_y = model.predict(test_x)
+X = dataset[['n1', 'n2', 'n3']]
+Y = dataset[['colour']]
 
-import matplotlib.pyplot as plt
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import LabelEncoder
+from tensorflow.keras.utils import to_categorical
 
-plt.plot(tested_y, test_y)
-plt.show()
+ohe = OneHotEncoder(sparse=False)
+le = LabelEncoder()
+
+
+Y1 = le.fit_transform(Y)
+Y1 = array(Y1)
+Y2 = to_categorical(Y1)
+
+
+print(Y1)
+print(Y2[0])
+print(Y2[1])
+
+model.fit(X, Y2, epochs=3000, verbose=0)
+y = model.predict([[50,45,70]])
+print(y)

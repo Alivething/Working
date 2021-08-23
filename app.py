@@ -1,2 +1,7 @@
-from tensorflow import keras
-from keras.datasets import mnist
+x = 198609802479539879345
+while(x>0):
+    y = x%10
+    x = (int)(x/10)
+    print(y)
+
+    [73042, 2384723, 234902374,]
