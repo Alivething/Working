@@ -1,7 +1,4 @@
-x = 198609802479539879345
-while(x>0):
-    y = x%10
-    x = (int)(x/10)
-    print(y)
+import pandas as pd
+data = pd.read_csv("regions.csv")
 
-    [73042, 2384723, 234902374,]
+print(data.Regions.unique())
