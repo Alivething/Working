@@ -16,6 +16,7 @@ def plot_predictions(test,predicted):
     plt.legend()
     plt.show()
 
+
 dataset = pd.read_csv('CAT.csv')
 dataset = dataset[['Open', 'Close']]
 sc = MinMaxScaler(feature_range=(0,1))
