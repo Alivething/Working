@@ -5,6 +5,9 @@ mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 
 cap = cv2.VideoCapture(0)
+
+# frame = cv2.imread("BodyTracker 204\WIN_20211201_17_19_23_Pro.jpg")
+
 # Initiate pose model
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
     
@@ -22,8 +25,18 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
 
         # Pose Detections
         mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
-                        
-        # Draw connections
+
+        #Extracting wrist coordinates
+        # lhand = results.pose_landmarks.landmark[16]
+
+        # rhand = results.pose_landmarks.landmark[15]
+        # print(lhand, rhand)
+
+        # #Checking if left or right
+        # if(lhand.x> rhand.x):
+        #     print("Left higher")
+        # else: print("No")
+        # # Draw connections
         cv2.imshow('Raw Webcam Feed', image)
 
         if cv2.waitKey(10) & 0xFF == ord('q'):

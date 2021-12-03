@@ -1,7 +1,5 @@
-import keras
-from keras.optimizers import Adam
 import numpy as np
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LogisticRegression
 import pandas as pd
 
 train_data = pd.read_csv("WEC/train.csv")
@@ -13,17 +11,18 @@ train_index = train_data[['Id']]
 test_data = pd.read_csv("WEC/test.csv")
 
 testx = test_data[['F1','F2','F4','F5','F6','F7','F8','F10','F11']]
-testY = pd.read_csv("WEC/output.csv")
-testY = testY[['Expected']]
+# testY = pd.read_csv("WEC/output.csv")
+# testY = testY[['Expected']]
 test_index = test_data[['Id']]
 
-regressor = LinearRegression()
+regressor = LogisticRegression()
 regressor.fit(trainx, trainY)
 
-test_index = test_index.to_numpy(dtype=int)
 # print(test_index)
 
 y_pred = regressor.predict(testx)
+
+test_index = test_index.to_numpy(dtype=int)
 
 dataout = np.concatenate((test_index.reshape(len(test_index),1),y_pred.reshape(len(y_pred),1)),1)
 # print(dataout)
