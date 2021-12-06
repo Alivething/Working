@@ -1,4 +1,6 @@
 import mediapipe as mp
+import pynput
+from pynput.keyboard import Key, Controller
 import cv2 
 
 mp_drawing = mp.solutions.drawing_utils
@@ -6,7 +8,7 @@ mp_pose = mp.solutions.pose
 
 cap = cv2.VideoCapture(0)
 
-# frame = cv2.imread("BodyTracker 204\WIN_20211201_17_19_23_Pro.jpg")
+keyboard = Controller()
 
 # Initiate pose model
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
@@ -16,9 +18,11 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
         
         # Recolor Feed
         image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        image = cv2.flip(image, 1)
 
         # Make Detections
         results = pose.process(image)
+        
         
         # Recolor image back to BGR for rendering
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
@@ -26,17 +30,41 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
         # Pose Detections
         mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
 
-        #Extracting wrist coordinates
-        # lhand = results.pose_landmarks.landmark[16]
+        #Extracting the coordinates
+        lhand = results.pose_landmarks.landmark[15]
+        rhand= results.pose_landmarks.landmark[16]
+        lshoulder = results.pose_landmarks.landmark[11]
+        rshoulder = results.pose_landmarks.landmark[12]
 
-        # rhand = results.pose_landmarks.landmark[15]
-        # print(lhand, rhand)
+        #Checking if left or right
+        if((lhand.x< lshoulder.x)&(rhand.x< rshoulder.x)):
+            print("Left")
+            keyboard.release('w')
+            keyboard.release('d')
+            keyboard.press('a')
+            
+        elif((lhand.x> lshoulder.x)&(rhand.x> rshoulder.x)):
+            print("Right")
+            keyboard.release('a')
+            keyboard.release('w')
+            keyboard.press('d')
+            
+        elif((lhand.y< lshoulder.y)&(rhand.y< rshoulder.y)):
+            print("Up")
+            keyboard.release('a')
+            keyboard.release('d')
+            keyboard.press('w')
 
-        # #Checking if left or right
-        # if(lhand.x> rhand.x):
-        #     print("Left higher")
-        # else: print("No")
-        # # Draw connections
+        elif((lhand.y> lshoulder.y)&(rhand.y> rshoulder.y)):
+            keyboard.release('a')
+            keyboard.release('d')
+            keyboard.release('w')
+
+        if((lhand.y< lshoulder.y)&(rhand.y< rshoulder.y)&(lhand.x<rhand.x)):
+            print("Lol")
+            break
+        # Draw connections
+        
         cv2.imshow('Raw Webcam Feed', image)
 
         if cv2.waitKey(10) & 0xFF == ord('q'):
