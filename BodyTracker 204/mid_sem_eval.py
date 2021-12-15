@@ -4,18 +4,18 @@ import cv2
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 
-cap = cv2.VideoCapture(0)
+# cap = cv2.VideoCapture(0)
 
 
 
 # Initiate pose model
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
     
-    while cap.isOpened():
-        ret, frame = cap.read()
-    # for i in range(0, 5):
+    # while cap.isOpened():
+    #     ret, frame = cap.read()
+    for i in range(0, 5):
 
-        # frame = cv2.imread("C:/Users/kaust/Desktop/College stuff/Book/tg_000"+str(i)+".jpg")
+        frame = cv2.imread("C:/Users/kaust/Desktop/College stuff/Book/tg_000"+str(i)+".jpg")
         # Recolor Feed
         image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
@@ -27,10 +27,10 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 
         # Pose Detections
-        mp_drawing.draw_landmarks(bg, results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
+        mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
 
-        # image = cv2.flip(image, 1)
-        bg = cv2.flip(bg, 1)
+        image = cv2.flip(image, 1)
+        # bg = cv2.flip(bg, 1)
 
         #Extracting the coordinates
         lhand = results.pose_landmarks.landmark[15]
@@ -55,11 +55,11 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
             break
 
         # Draw connection
-        cv2.imshow('Raw Webcam Feed', bg)
-        # cv2.waitKey(1000)
+        cv2.imshow('Raw Webcam Feed', image)
+        cv2.waitKey(1000)
 
         if cv2.waitKey(10) & 0xFF == ord('q'):
             break
 
-cap.release()
+# cap.release()
 cv2.destroyAllWindows()

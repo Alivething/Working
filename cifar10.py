@@ -61,4 +61,4 @@ showImage(X_test, y_test, 1)
 showImage(X_test, y_test, 2)
 print(y_classes)
 
-model.save("cifar10.h5")
+# model.save("cifar10.h5")
