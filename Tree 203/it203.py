@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+
+# Alpha factor in joint splitting 
 alpha = 0.5
 
 class Node():
@@ -70,7 +72,7 @@ class DecisionTreeClassifier():
                 # check if childs are not null
                 if len(dataset_left)>0 and len(dataset_right)>0:
                     y, left_y, right_y = dataset[:, -1], dataset_left[:, -1], dataset_right[:, -1]
-                    # compute information gain
+                    # compute information gain/ gini index/ joint split depending on mode
                     curr_info_gain = self.information_gain(y, left_y, right_y, "joint")
                     # update the best split if needed
                     if curr_info_gain>max_info_gain:
@@ -91,8 +93,8 @@ class DecisionTreeClassifier():
         dataset_right = np.array([row for row in dataset if row[feature_index]>threshold])
         return dataset_left, dataset_right
     
-    def information_gain(self, parent, l_child, r_child, mode="gini"):
-        ''' function to compute information gain '''
+    def information_gain(self, parent, l_child, r_child, mode="joint"):
+        ''' function to compute information gain/ gini index/ joint split depending on mode'''
         
         weight_l = len(l_child) / len(parent)
         weight_r = len(r_child) / len(parent)
@@ -171,14 +173,15 @@ class DecisionTreeClassifier():
 
 classifier = DecisionTreeClassifier(max_depth=4)
 
-dat = pd.read_csv("Tree 203/Places.csv")
+dat = pd.read_csv("Places.csv")
 X_train = dat.loc[:,['Cost','Duration','Family']]
 y_train = dat.loc[:, ['Target']]
 
 classifier.fit(X_train,y_train)
 classifier.print_tree()
 
-# y_pred = classifier.make_prediction([85600, 7, 0], classifier.root)
+# Values that can be used for prediction
+# y_pred = classifier.make_prediction([35600, 2, 0], classifier.root)
 # # [45600, 4, 1]
 # # [35600, 2, 0]
 # # [15600, 1, 1]
