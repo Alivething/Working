@@ -1,2 +1,3 @@
 # AI-CV-stuff
-Some AI ML CV programs that ive explored 
+Some AI ML CV programs that ive explored
+
