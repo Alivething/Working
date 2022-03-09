@@ -1,0 +1,2 @@
+This project uses Entropy, Information Gain and Gini Index to split and find the ideal destination spot given a set destinations.
+The set is split into 2 and the ideal splitting criteraia is found using the modes above
