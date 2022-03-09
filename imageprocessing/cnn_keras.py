@@ -1,5 +1,3 @@
-# https://towardsdatascience.com/building-a-convolutional-neural-network-cnn-in-keras-329fbbadc5f5
-
 from keras.datasets import mnist
 #download mnist data and split into train and test sets
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
