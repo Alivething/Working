@@ -21,7 +21,7 @@ class Node:
 
 #Creating tree
 tree = Node(5)
-tree.left. = Node(12)
+tree.left = Node(12)
 tree.left.left = Node(99)
 tree.left.right = Node(33)
 tree.right = Node(29)
