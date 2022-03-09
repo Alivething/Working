@@ -1,6 +1,4 @@
-import numpy
 import pandas as pd
-from pandas.core.frame import DataFrame
 import matplotlib.pyplot as plt
 
 data = pd.read_csv("SOM/som.csv")
