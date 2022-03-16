@@ -17,7 +17,7 @@ def plot_predictions(test,predicted):
     plt.show()
 
 
-dataset = pd.read_csv('CAT.csv')
+dataset = pd.read_csv('LSTMStocks\CAT.csv')
 dataset = dataset[['Open', 'Close']]
 sc = MinMaxScaler(feature_range=(0,1))
 training_set_scaled = sc.fit_transform(dataset)
@@ -56,7 +56,7 @@ print(training_set_scaled)
 
 # regressor.save("lstm.h5")
 
-regress = load_model("lstmstockclose.h5")
+regress = load_model("LSTMStocks\lstmstockclose.h5")
 
 X_test = []
 y_test = []
