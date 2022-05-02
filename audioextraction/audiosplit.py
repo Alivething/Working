@@ -1,3 +1,5 @@
+#This file cuts an audio segemnt into 30 second clips
+
 from pydub import AudioSegment
 
 mp3_audio = AudioSegment.from_file(r"adio2.wav", format="wav")
