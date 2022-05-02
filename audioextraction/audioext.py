@@ -63,5 +63,13 @@ print()
 
 kw_extractor = yake.KeywordExtractor(top=10, stopwords=None, dedupLim=0.3, n=1)
 keywords = kw_extractor.extract_keywords(final_text)
+
+query = ""
 for kw, v in keywords:
+  query += kw + " "  
   print("Keyphrase: ",kw, ": score", v)
+
+from googlesearch import search
+
+for j in search(query, tld="com", lang = "english", num=20, stop=20, pause=2):
+	print(j)
