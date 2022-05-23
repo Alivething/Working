@@ -2,7 +2,7 @@
 
 from pydub import AudioSegment
 
-mp3_audio = AudioSegment.from_file(r"adio2.wav", format="wav")
+mp3_audio = AudioSegment.from_file(r"adio.wav", format="wav")
 print(len(mp3_audio)/(1000*30))
 
 counter_audio = 30
