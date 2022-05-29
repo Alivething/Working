@@ -17,5 +17,10 @@ NLP Using Vectorization
 
 Lane detection using OpenCV
 
-*Finding Diamonds in Minecraft* has to be one of my favourite projects (imageprocessing\diamons.mp4)
-*Controlling mario with my body* is a close second (BodyTracker 204\204 Project Demo.mp4)
+Link recommendation using web scraping
+
+Keyword extraction from audio transcription
+
+*Controlling mario with my body* has to be one of my favourite projects (BodyTracker 204\204 Project Demo.mp4)
+*Finding Diamonds in Minecraft* is a close second (imageprocessing\diamons.mp4)
+*Link recommendation by web scraping using keywords extracted from audio* is a unique project that helped me explore various python modules and work on implementing them together to form a complete application
