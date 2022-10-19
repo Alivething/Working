@@ -18,7 +18,7 @@ y_test = np.squeeze(y_test)
 
 showImage(X_train, y_train, 12)
 
-# from keras.utils import to_categorical()
+# from keras.utils import to_categorical
 # y_train = to_categorical(y_train) 
 # y_test = to_categorical(y_test)
 
@@ -48,11 +48,11 @@ print(X_train[0].shape)
 
 model = load_model("imageprocessing/cifar10.h5")
 
-y_pred = model.predict(X_test[0:3])
+y_pred = model.predict(X_test[20:23])
 y_classes = [np.argmax(element) for element in y_pred]
-showImage(X_test, y_test, 0)
-showImage(X_test, y_test, 1)
-showImage(X_test, y_test, 2)
+showImage(X_test, y_test, 20)
+showImage(X_test, y_test, 21)
+showImage(X_test, y_test, 22)
 print(y_classes)
 
-# model.save("cifar10.h5")
+# model.save("cifar101.h5")
